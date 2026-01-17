@@ -1,43 +1,40 @@
 # Nexus-9 Intelligence Engine
 
-The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking platform designed for investment analysis. It utilizes a multi-agent system to perform stochastic modeling of startups, focusing on founder psychographics, market topology, and financial stress testing through 10,000-iteration Monte Carlo simulations.
+The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking platform designed for investment analysis. It utilizes a multi-agent system powered by **Google Gemini** to perform stochastic modeling of startups, focusing on founder psychographics, market topology, and financial stress testing through semantic simulations.
 
 ---
 
 ## Preview 
 
-<img width="1461" height="578" alt="Screenshot 2026-01-17 at 10 05 47 PM" src="https://github.com/user-attachments/assets/cfb63272-a45c-4874-97e2-2b415c9c9df2" />
-<img width="1470" height="775" alt="Screenshot 2026-01-17 at 10 06 18 PM" src="https://github.com/user-attachments/assets/e78e5bb5-c720-4aea-ac01-22e149e390e5" />
+<img width="1461" height="578" alt="Command Center" src="https://github.com/user-attachments/assets/cfb63272-a45c-4874-97e2-2b415c9c9df2" />
+<img width="1470" height="775" alt="Risk Analysis" src="https://github.com/user-attachments/assets/e78e5bb5-c720-4aea-ac01-22e149e390e5" />
 
 ---
 
 ## Architecture
 
-The system follows a modular architecture that separates the React-based visualization layer from the high-concurrency multi-agent backend.
+The system utilizes a client-side architecture built with Vite and React. The frontend interacts directly with the Google Gemini API using the `gemini-3-flash-preview` model for low-latency, high-reasoning intelligence.
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
 │                   React Dashboard                       │
 │          (Tornado Charts, Risk Heatmaps)                │
 └────────────────────┬────────────────────────────────────┘
-                     │ REST API / Signal Ingestion
+                     │ Multimodal Input (Text + PDF/Images)
+                     │ Direct SDK Call (@google/genai)
 ┌────────────────────▼────────────────────────────────────┐
-│              Agent Alpha (Sourcing)                     │
-│           Signal Extraction & Sentiment                 │
-└────────────────────┬────────────────────────────────────┘
-                     │ Artifact State
-┌────────────────────▼────────────────────────────────────┐
-│         Agent Beta (Backend / Digital Twin)             │
-│           Persistent Digital Twin State                 │
-└──────┬──────────────────────────────┬───────────────────┘
-       │                              │
-┌──────▼──────────┐          ┌────────▼─────────────┐
-│  Agent Gamma    │          │   Agent Delta         │
-│  (Simulator)    │          │   (Auditor)           │
-│  Monte Carlo    │          │   Level 2 Benchmarks  │
-│  10k Iterations │          │   DSPy "Truth-Seeker" │
-└─────────────────┘          └──────────────────────┘
-
+│          Google Gemini API (Model Layer)                │
+│                                                         │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
+│  │ Agent Alpha  │  │ Agent Beta   │  │ Agent Gamma  │   │
+│  │ (Sourcing)   │  │ (Digital Twin│  │ (Simulator)  │   │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘   │
+│         │                 │                 │           │
+└─────────┼─────────────────┼─────────────────┼───────────┘
+          │                 │                 │
+          │          Structured JSON          │
+          └─────────────────▼─────────────────┘
+                     React Visualization
 ```
 
 ---
@@ -46,77 +43,70 @@ The system follows a modular architecture that separates the React-based visuali
 
 The engine follows a linear, rigorous workflow to move from raw data to a probabilistic investment thesis:
 
-1. **Ingestion**: Users upload pitch deck text, LinkedIn bios, or GitHub Readme files via the Command Center.
-2. **Signal Extraction (Alpha)**: Initiates an "Antigravity Browser" scrape and signal extraction to create sentiment artifacts.
-3. **State Initialization (Beta)**: Constructs the Digital Twin by ingesting founder psychographics and locking the persistent state.
-4. **Stochastic Modeling (Gamma)**: Executes 10,000 Monte Carlo iterations to model scenarios like "Big Squeeze" (interest rate shocks) or "Talent Leak".
-5. **Audit and Visualization (Delta)**: Conducts Level 2 financial stress testing, generates Risk Tornado charts, and prepares the "Truth-Seeker" interrogation.
+1.  **Ingestion**: Users upload pitch decks (PDF/Images) or paste raw text (LinkedIn bios, GitHub Readmes) via the Command Center.
+2.  **Signal Extraction (Alpha)**: The engine parses multimodal inputs to extract "High Agency" signals and sentiment artifacts.
+3.  **State Initialization (Beta)**: Constructs a "Digital Twin" of the startup by estimating missing financials (Burn Multiple, Rule of 40) based on seed-stage benchmarks.
+4.  **Stochastic Modeling (Gamma)**: The LLM performs "Mental Simulations" (semantic Monte Carlo runs) to model scenarios like "The Big Squeeze" (capital scarcity) or "Talent Leak".
+5.  **Audit and Visualization (Delta)**: Generates a JSON-structured Risk Audit, populating the Risk Tornado chart and generating "Truth-Seeker" interrogation questions.
 
 ---
 
 ## Technical Stack
 
-### Frontend
-
-* **Framework**: React 19 (TypeScript)
-* **Build Tool**: Vite
-* **Styling**: Tailwind CSS
-* **Visualization**: Recharts (Radar, Bar, and Tornado charts)
-* **Icons and Motion**: Lucide React and Framer Motion
-
-### Backend
-
-* **Language**: Python 3.13
-* **Framework**: FastAPI and Pydantic
-* **Intelligence**: Google Gemini (@google/genai) and DSPy for reasoning
-* **Data Processing**: NumPy for simulation and LlamaIndex for document ingestion
-
----
-
-## Mathematical Implementation: Agent Gamma
-
-Agent Gamma serves as the core stochastic engine, modeling startup survival through  iterations per scenario.
-
-### Core Variables and Formulae
-
-The baseline runway () is determined by the ratio of current cash reserves () to the monthly net burn ():
-
-During simulations, the engine applies stochastic multipliers () representing specific Black Swan scenarios:
-
-* **Big Squeeze**: Simulates interest rate shocks and reduced capital availability.
-* **Talent Leak**: Models the impact of sudden personnel departures on productivity and burn.
-* **Commoditization**: Adjusts revenue growth to simulate pressure from open-source or incumbent competition.
-
-### Survival Probability
-
-The engine calculates the Survival Probability () by determining the frequency of iterations where the digital twin maintains a positive runway over a standard horizon:
+*   **Framework**: React 19 (TypeScript)
+*   **Build Tool**: Vite
+*   **Intelligence**: Google GenAI SDK (`@google/genai`)
+*   **Model**: `gemini-3-flash-preview`
+*   **Styling**: Tailwind CSS
+*   **Visualization**: Recharts
+*   **Icons**: Lucide React
 
 ---
 
 ## Installation and Setup
 
-### Backend
+### Prerequisites
 
-1. Navigate to the backend directory: `cd backend`.
-2. Install dependencies: `python3 -m pip install -r requirements.txt`.
-3. Set the python path: `export PYTHONPATH=$PYTHONPATH:$(pwd)`.
-4. Launch the server: `python3 -m backend.main`.
+*   Node.js (v18+)
+*   A valid **Google Gemini API Key**
 
-### Frontend
+### Installation
 
-1. Navigate to the frontend directory: `cd frontend`.
-2. Install packages: `npm install`.
-3. Add your `GEMINI_API_KEY` to your environment variables or `.env` file.
-4. Run the development environment: `npm run dev`.
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/nexus-9-intelligence-engine.git
+    cd nexus-9-intelligence-engine
+    ```
+
+2.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment**:
+    Create a `.env` file in the root directory:
+    ```bash
+    touch .env
+    ```
+    Add your API key:
+    ```text
+    API_KEY=your_google_gemini_api_key_here
+    ```
+
+4.  **Launch Development Server**:
+    ```bash
+    npm run dev
+    ```
+
+5.  **Access**:
+    Open the local URL provided by Vite (usually `http://localhost:5173`) in your browser.
 
 ---
 
 ## Directory Structure
 
-* **backend/**: Contains Agent Beta (FastAPI), Agent Gamma (Simulator), and Agent Delta (Auditor).
-* **frontend/src/components/**: UI components including `RiskTornado.tsx`, `AgentTerminal.tsx`, and `Sidebar.tsx`.
-* **reports/**: Stores generated Level 2 reports and founder audits.
-* **templates/**: Markdown templates for founder audits and market topology.
-* **types.ts**: Defines core data models and risk level enumerations for the engine.
-
-
+*   **components/**: UI components (`RiskTornado`, `AgentTerminal`, `Sidebar`).
+*   **services/**: API integration with Google Gemini (`geminiService.ts`).
+*   **App.tsx**: Main application orchestrator.
+*   **types.ts**: TypeScript definitions for the structured financial and risk models.
+*   **vite.config.ts**: Build configuration and environment variable injection.
