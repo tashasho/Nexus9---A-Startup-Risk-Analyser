@@ -158,12 +158,3 @@ NEXUS9/
 │   └── market_topology.md
 └── engine.py                # Standalone analysis utility
 ```
-
-## License
-
-Proprietary — Tier-1 VC Internal Tool
-
-## Author
-
-Nexus-9 Intelligence Engine  
-Built for de-risking seed/Series A deep tech and SaaS investments
