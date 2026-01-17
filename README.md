@@ -115,4 +115,4 @@ The engine calculates the Survival Probability () by determining the frequency o
 * **templates/**: Markdown templates for founder audits and market topology.
 * **types.ts**: Defines core data models and risk level enumerations for the engine.
 
-Would you like me to generate a script to automate the environment configuration for the Gemini API key?
+
