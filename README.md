@@ -116,32 +116,6 @@ curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=cbdc_sho
 curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=commoditization"
 ```
 
-## Case Studies
-
-### SynapseGrid (AI Agent Infrastructure)
-- **Valuation**: $18M (Par with 2026 AI Seed median)
-- **Burn Multiple**: INF (0 revenue)
-- **Commoditization Risk**: 0% survival if OpenAI releases "GPT-Protocol"
-- **Report**: `reports/synapsegrid_level2_test.md`
-
-### OrbitSettlement (Stablecoin Payments)
-- **Valuation**: $70M (1.5x Premium)
-- **Revenue Multiple**: 129x (Volume Multiple: 0.14x)
-- **CBDC Shock**: 0% survival (Default Dead on unit economics)
-- **Report**: `reports/orbit_level2_test.md`
-
-### Chronos Bio (Longevity Peptides)
-- **Valuation**: $12M Series A
-- **Runway**: 26.7 months
-- **Regulatory Arbitrage**: Singapore wet lab strategy
-- **Report**: `reports/chronos_bio_report.md`
-
-### AegisMesh (Dual-Use Edge AI)
-- **Valuation**: $145M (3.1x Premium)
-- **Runway**: 4.2 months ⚠️ **CRITICAL**
-- **NATO Contract Dependency**: Binary outcome (win $250M or zero-out)
-- **Report**: `reports/aegismesh_level2_report.md`
-
 ## Output Structure
 
 Each analysis generates:
