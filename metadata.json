@@ -1,0 +1,5 @@
+{
+  "name": "Nexus-9 VC Intelligence Engine",
+  "description": "A multi-agent sourcing and risk engine for Tier-1 VC due diligence, featuring stochastic modeling, digital twins, and stress-test simulations powered by Gemini.",
+  "requestFramePermissions": []
+}
