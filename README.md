@@ -1,160 +1,174 @@
-# Nexus-9 Intelligence Engine
+Nexus9: Startup Risk Analyser
 
-> **Proprietary VC De-Risking Platform** — A multi-agent system for stochastic investment analysis using founder psychographics, market topology, and Monte Carlo simulations.
+Nexus9 is a comprehensive analytical framework designed to quantify the multidimensional risks inherent in early-stage startups. By leveraging data-driven metrics across financial, operational, and market domains, Nexus9 transforms qualitative uncertainty into actionable quantitative insights for venture capitalists, angel investors, and founders.
 
-## Overview
+📌 Table of Contents
 
-Nexus-9 is a Tier-1 Venture Capital intelligence tool designed to de-risk seed/Series A investments through aggressive data synthesis and probabilistic modeling. The engine identifies **"Founder-Market Fit"** by executing 10,000-iteration Monte Carlo simulations across multiple failure scenarios.
+Project Vision
 
-## Architecture
+The Risk Framework
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                   React Dashboard                        │
-│          (Tornado Charts, Risk Heatmaps)                │
-└────────────────────┬────────────────────────────────────┘
-                     │ REST API
-┌────────────────────▼────────────────────────────────────┐
-│              FastAPI Backend (Agent Beta)                │
-│           Persistent Digital Twin State                  │
-└──────┬──────────────────────────────┬───────────────────┘
-       │                              │
-┌──────▼──────────┐          ┌────────▼─────────────┐
-│  Agent Gamma    │          │   Agent Delta         │
-│  (Simulator)    │          │   (Auditor)           │
-│  Monte Carlo    │          │   Level 2 Benchmarks  │
-│  10k Iterations │          │   DSPy "Truth-Seeker" │
-└─────────────────┘          └──────────────────────┘
-```
+Key Features
 
-### Core Components
+Architecture & Tech Stack
 
-- **Agent Beta** (`backend/main.py`): FastAPI server managing Digital Twin state
-- **Agent Gamma** (`backend/agents/gamma.py`): Monte Carlo simulation engine
-- **Agent Delta** (`backend/agents/delta.py`): Level 2 financial stress-tester with DSPy integration
-- **Tornado UI** (`frontend/src/components/TornadoChart.jsx`): React visualization component
+Installation
 
-## Features
+Usage Guide
 
-### Phase 1: Founder Psychographics
-- **High-Agency Audit**: Detection of "Zero-to-One" momentum
-- **Cognitive Flexibility**: Distinguish "Stubborn Visionaries" from "Rigid Thinkers"
-- **Talent Magnetism**: Network analysis for A-player recruitment
-- **Technical Moat**: "Wrapper-builder" vs "Core-engine-architect" classification
+Data Dictionary
 
-### Phase 2: Market Topology
-- **Ghost Competitors**: Identification of incumbent feature-sets (Google, AWS, Salesforce)
-- **Category Maturity**: Blue Ocean / Red Ocean / Market Expansion classification
-- **Regulatory Cliff**: 2026-2027 legislation impact analysis (AI Acts, Privacy Laws)
+Roadmap
 
-### Phase 3: Digital Twin (Stochastic Modeling)
-```python
-{
-  "burn_multiple": float,
-  "runway": str,
-  "simulations": {
-    "big_squeeze": float,       # Interest rate shock
-    "talent_leak": float,       # CTO/Lead departure
-    "commoditization": float,   # Open-source competition
-    "cbdc_shock": float,        # Central bank digital currency (fintech)
-    "regulatory_cliff": float   # Legislation changes
-  }
-}
-```
+Contributing
 
-### Phase 4: Level 2 Stress Testing
-- **Benchmark Calibration**: Compare against 2026 VC medians ($17.9M AI Seed, $46.5M Fintech Series A)
-- **Sensitivity Analysis**: Token costs, sales cycles, competitor actions
-- **Anti-Thesis Defense**: Construct the strongest bear case
-- **Probabilistic Confidence Intervals**: Founder resilience, technical moat durability, 10x exit probability
+🎯 Project Vision
 
-## Installation
+Startups fail for predictable reasons. Nexus9 was built on the premise that while you cannot eliminate risk, you can measure it. Our goal is to provide a "Risk DNA" profile for every venture, highlighting exactly where the "single points of failure" lie—whether it's an unsustainable burn rate, high customer concentration, or a lack of technical moat.
 
-### Backend Setup
-```bash
-cd /Users/bhumikamarmat/NEXUS9
-python3 -m pip install -r backend/requirements.txt
-export PYTHONPATH=$PYTHONPATH:/Users/bhumikamarmat/NEXUS9
-python3 -m backend.main
-```
+📊 The Risk Framework
 
-The API will be available at `http://localhost:8000`
+Nexus9 evaluates startups across nine core pillars (hence the name "Nexus9"):
 
-### Frontend Setup
-```bash
-cd /Users/bhumikamarmat/NEXUS9/frontend
-npm install
-npm run dev
-```
+Financial Stability: Burn rate, runway, and revenue growth consistency.
 
-## Usage
+Market Dynamics: Total Addressable Market (TAM) vs. Serviceable Obtainable Market (SOM).
 
-### 1. Create a Digital Twin
-```bash
-curl -X POST "http://localhost:8000/twins/YourStartup" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "YourStartup",
-    "stage": "Seed",
-    "cash": 4000000,
-    "burn": 110000,
-    "arr": 540000,
-    "net_new_arr": 0,
-    "valuation_pre": 18000000
-  }'
-```
+Product-Market Fit (PMF): NPS scores, churn rates, and organic vs. paid acquisition.
 
-### 2. Run Simulations
-```bash
-# Big Squeeze (Interest Rate Shock)
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=big_squeeze"
+Operational Scalability: Efficiency of internal processes and infrastructure.
 
-# CBDC Shock (for Fintech)
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=cbdc_shock"
+Team Composition: Founder-market fit, technical competency, and advisor quality.
 
-# Commoditization
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=commoditization"
-```
+Regulatory & Legal: Compliance overhead, IP protection, and industry-specific hurdles.
 
-## Output Structure
+Competitive Landscape: Moat strength and barrier to entry for incumbents.
 
-Each analysis generates:
+Funding Environment: Current cap table health and future fundraising feasibility.
 
-1. **Investment Thesis** (3 sentences): Why this could be a billion-dollar company
-2. **The "Bear Case"**: Brutal explanation of why the company will likely fail
-3. **Risk Heatmap**: LOW/MED/HIGH for Team, Tech, Market, Timing
-4. **Simulation Dashboard**: Survival % scores for all scenarios
-5. **The "Truth-Seeker" Questions**: 3 uncomfortable questions to reveal cracks in founder logic
+Execution Risk: Historical milestone achievement vs. projected roadmap.
 
-## Technology Stack
+✨ Key Features
 
-- **Backend**: Python 3.13, FastAPI, Pydantic
-- **Agents**: DSPy (reasoning), LlamaIndex (document ingestion)
-- **Simulation**: NumPy, custom Monte Carlo engine
-- **Frontend**: React, Vite, Framer Motion, Lucide Icons
-- **Visualization**: Custom SVG Tornado Charts
+1. Risk Scoring Engine
 
-## Directory Structure
+The core algorithm calculates a weighted risk score (0-100). Higher scores indicate lower risk. It uses a non-linear weighting system where critical failures (e.g., < 3 months runway) heavily penalize the overall score.
 
-```
-NEXUS9/
-├── backend/
-│   ├── main.py              # Agent Beta (FastAPI server)
-│   ├── agents/
-│   │   ├── gamma.py         # Monte Carlo simulator
-│   │   └── delta.py         # Level 2 auditor
-│   └── requirements.txt
-├── frontend/
-│   └── src/
-│       └── components/
-│           └── TornadoChart.jsx
-├── reports/
-│   ├── synapsegrid_level2_test.md
-│   ├── orbit_level2_test.md
-│   ├── chronos_bio_report.md
-│   └── aegismesh_level2_report.md
-├── templates/
-│   ├── founder_audit.md
-│   └── market_topology.md
-└── engine.py                # Standalone analysis utility
-```
+2. Sensitivity Analysis (Stress Testing)
+
+Simulate "What If" scenarios:
+
+What if the next funding round is delayed by 6 months?
+
+What if CAC (Customer Acquisition Cost) increases by 40%?
+
+What if the lead developer departs?
+
+3. Visual Dashboarding
+
+Radar Charts: Visualizing the balance across the 9 risk pillars.
+
+Runway Heatmaps: Predicting "Death Dates" based on various spend scenarios.
+
+Cohort Analysis: Evaluating user retention as a proxy for product health.
+
+🛠 Architecture & Tech Stack
+
+Nexus9 is built with a modular architecture to allow for easy integration of new risk modules.
+
+Backend: Python 3.9+
+
+Data Science: pandas (data manipulation), numpy (numerical logic), scipy (statistical analysis).
+
+Visuals: plotly or streamlit for interactive web-based reporting.
+
+Validation: pydantic for strict data schema enforcement.
+
+📥 Installation
+
+Prerequisites
+
+Python 3.9 or higher
+
+pip or conda
+
+Setup
+
+Clone the repository:
+
+git clone [https://github.com/tashasho/Nexus9---A-Startup-Risk-Analyser.git](https://github.com/tashasho/Nexus9---A-Startup-Risk-Analyser.git)
+cd Nexus9---A-Startup-Risk-Analyser
+
+
+Create and activate a virtual environment:
+
+# Using venv
+python -m venv venv
+source venv/bin/activate # Windows: venv\Scripts\activate
+
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+
+📖 Usage Guide
+
+1. Preparing your Input
+
+Nexus9 expects a JSON or CSV file containing startup metrics. See examples/startup_sample.json for a template.
+
+2. Running the Analyzer
+
+Execute the main script to generate a report:
+
+python nexus9_analyzer.py --file data/my_startup.json --output report.pdf
+
+
+3. Web Dashboard (Experimental)
+
+To view the results in an interactive browser dashboard:
+
+streamlit run dashboard.py
+
+
+📂 Data Dictionary
+
+When preparing your data, ensure the following fields are present:
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| monthly_burn | float | Total cash outflow per month. |
+| cash_on_hand | float | Current liquid capital. |
+| cac | float | Cost to acquire one customer. |
+| ltv | float | Lifetime value of a customer. |
+| churn_rate | percentage | Monthly percentage of lost customers. |
+
+🗺 Roadmap
+
+[ ] Phase 1: Refine the 9-pillar weighting algorithm based on historical unicorn data.
+
+[ ] Phase 2: Integrate NLP for automated sentiment analysis of founder LinkedIn profiles and glassdoor reviews.
+
+[ ] Phase 3: API development for integration with VC CRM systems.
+
+[ ] Phase 4: Machine Learning model to predict "Time-to-Exit" based on risk profiles.
+
+🤝 Contributing
+
+We welcome contributions from data scientists, financial analysts, and developers.
+
+Fork the repository.
+
+Create a branch (git checkout -b feature/NewRiskMetric).
+
+Commit your changes (git commit -m 'Add Metric X').
+
+Push to the branch (git push origin feature/NewRiskMetric).
+
+Open a Pull Request.
+
+📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Disclaimer: Nexus9 is a decision-support tool. It does not constitute financial advice. Startup investing involves significant risk of loss.
