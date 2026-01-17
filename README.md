@@ -2,8 +2,6 @@
 
 The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking platform designed for investment analysis. It utilizes a multi-agent system to perform stochastic modeling of startups, focusing on founder psychographics, market topology, and financial stress testing through 10,000-iteration Monte Carlo simulations.
 
-Try it here : https://ai.studio/apps/drive/1tVCNxnAbA6AyIE_zMWBi2_sq6ITp7ivs?fullscreenApplet=true
-
 ---
 
 ## Preview 
