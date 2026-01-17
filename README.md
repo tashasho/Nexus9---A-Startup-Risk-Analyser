@@ -4,6 +4,12 @@ The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking plat
 
 Try it here : https://ai.studio/apps/drive/1tVCNxnAbA6AyIE_zMWBi2_sq6ITp7ivs?fullscreenApplet=true
 
+---
+
+## Preview 
+
+<img width="1461" height="578" alt="Screenshot 2026-01-17 at 10 05 47 PM" src="https://github.com/user-attachments/assets/cfb63272-a45c-4874-97e2-2b415c9c9df2" />
+<img width="1470" height="775" alt="Screenshot 2026-01-17 at 10 06 18 PM" src="https://github.com/user-attachments/assets/e78e5bb5-c720-4aea-ac01-22e149e390e5" />
 
 ---
 
