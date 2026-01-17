@@ -4,16 +4,9 @@ The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking plat
 
 ---
 
-## Preview 
-
-<img width="1461" height="578" alt="Command Center" src="https://github.com/user-attachments/assets/cfb63272-a45c-4874-97e2-2b415c9c9df2" />
-<img width="1470" height="775" alt="Risk Analysis" src="https://github.com/user-attachments/assets/e78e5bb5-c720-4aea-ac01-22e149e390e5" />
-
----
-
 ## Architecture
 
-The system utilizes a client-side architecture built with Vite and React. The frontend interacts directly with the Google Gemini API using the `gemini-3-flash-preview` model for low-latency, high-reasoning intelligence.
+**Serverless & Client-Side.** This application is built as a Single Page Application (SPA) using React and Vite. It interacts directly with the Google Gemini API. There is no intermediate backend server (Node/Python).
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -39,18 +32,6 @@ The system utilizes a client-side architecture built with Vite and React. The fr
 
 ---
 
-## Workflow: The Intelligence Pipeline
-
-The engine follows a linear, rigorous workflow to move from raw data to a probabilistic investment thesis:
-
-1.  **Ingestion**: Users upload pitch decks (PDF/Images) or paste raw text (LinkedIn bios, GitHub Readmes) via the Command Center.
-2.  **Signal Extraction (Alpha)**: The engine parses multimodal inputs to extract "High Agency" signals and sentiment artifacts.
-3.  **State Initialization (Beta)**: Constructs a "Digital Twin" of the startup by estimating missing financials (Burn Multiple, Rule of 40) based on seed-stage benchmarks.
-4.  **Stochastic Modeling (Gamma)**: The LLM performs "Mental Simulations" (semantic Monte Carlo runs) to model scenarios like "The Big Squeeze" (capital scarcity) or "Talent Leak".
-5.  **Audit and Visualization (Delta)**: Generates a JSON-structured Risk Audit, populating the Risk Tornado chart and generating "Truth-Seeker" interrogation questions.
-
----
-
 ## Technical Stack
 
 *   **Framework**: React 19 (TypeScript)
@@ -68,9 +49,9 @@ The engine follows a linear, rigorous workflow to move from raw data to a probab
 ### Prerequisites
 
 *   Node.js (v18+)
-*   A valid **Google Gemini API Key**
+*   A valid **Google Gemini API Key** (Get one at [aistudio.google.com](https://aistudio.google.com))
 
-### Installation
+### Quick Start
 
 1.  **Clone the repository**:
     ```bash
@@ -88,9 +69,9 @@ The engine follows a linear, rigorous workflow to move from raw data to a probab
     ```bash
     touch .env
     ```
-    Add your API key:
+    Add your API key to the file:
     ```text
-    API_KEY=your_google_gemini_api_key_here
+    API_KEY=AIzaSy...
     ```
 
 4.  **Launch Development Server**:
@@ -105,8 +86,11 @@ The engine follows a linear, rigorous workflow to move from raw data to a probab
 
 ## Directory Structure
 
-*   **components/**: UI components (`RiskTornado`, `AgentTerminal`, `Sidebar`).
-*   **services/**: API integration with Google Gemini (`geminiService.ts`).
-*   **App.tsx**: Main application orchestrator.
-*   **types.ts**: TypeScript definitions for the structured financial and risk models.
-*   **vite.config.ts**: Build configuration and environment variable injection.
+This project uses a flat directory structure optimized for Vite.
+
+*   `components/`: UI components (`RiskTornado`, `AgentTerminal`, `Sidebar`).
+*   `services/`: API integration with Google Gemini (`geminiService.ts`).
+*   `App.tsx`: Main application orchestrator and state management.
+*   `types.ts`: TypeScript definitions for the structured financial and risk models.
+*   `vite.config.ts`: Vite configuration and environment variable injection.
+*   `index.html`: Application entry point.
