@@ -4,6 +4,14 @@ The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking plat
 
 ---
 
+## Preview 
+
+<img width="1461" height="578" alt="Screenshot 2026-01-17 at 10 05 47 PM" src="https://github.com/user-attachments/assets/f472fd82-6797-42b7-a564-312731e53be5" />
+
+<img width="1470" height="775" alt="Screenshot 2026-01-17 at 10 06 18 PM" src="https://github.com/user-attachments/assets/f2bf80c3-2d92-4719-9f1d-5a2101046c5c" />
+
+---
+
 ## Architecture
 
 **Serverless & Client-Side.** This application is built as a Single Page Application (SPA) using React and Vite. It interacts directly with the Google Gemini API. There is no intermediate backend server (Node/Python).
