@@ -1,22 +1,27 @@
 # Nexus-9 Intelligence Engine
 
-> **Proprietary VC De-Risking Platform** — A multi-agent system for stochastic investment analysis using founder psychographics, market topology, and Monte Carlo simulations.
+The Nexus-9 Intelligence Engine is a proprietary Venture Capital de-risking platform designed for Tier-1 investment analysis. It utilizes a multi-agent system to perform stochastic modeling of startups, focusing on founder psychographics, market topology, and financial stress testing through 10,000-iteration Monte Carlo simulations.
 
-## Overview
-
-Nexus-9 is a Tier-1 Venture Capital intelligence tool designed to de-risk seed/Series A investments through aggressive data synthesis and probabilistic modeling. The engine identifies **"Founder-Market Fit"** by executing 10,000-iteration Monte Carlo simulations across multiple failure scenarios.
+---
 
 ## Architecture
 
-```
+The system follows a modular architecture that separates the React-based visualization layer from the high-concurrency multi-agent backend.
+
+```text
 ┌─────────────────────────────────────────────────────────┐
-│                   React Dashboard                        │
+│                   React Dashboard                       │
 │          (Tornado Charts, Risk Heatmaps)                │
 └────────────────────┬────────────────────────────────────┘
-                     │ REST API
+                     │ REST API / Signal Ingestion
 ┌────────────────────▼────────────────────────────────────┐
-│              FastAPI Backend (Agent Beta)                │
-│           Persistent Digital Twin State                  │
+│              Agent Alpha (Sourcing)                     │
+│           Signal Extraction & Sentiment                 │
+└────────────────────┬────────────────────────────────────┘
+                     │ Artifact State
+┌────────────────────▼────────────────────────────────────┐
+│         Agent Beta (Backend / Digital Twin)             │
+│           Persistent Digital Twin State                 │
 └──────┬──────────────────────────────┬───────────────────┘
        │                              │
 ┌──────▼──────────┐          ┌────────▼─────────────┐
@@ -25,136 +30,87 @@ Nexus-9 is a Tier-1 Venture Capital intelligence tool designed to de-risk seed/S
 │  Monte Carlo    │          │   Level 2 Benchmarks  │
 │  10k Iterations │          │   DSPy "Truth-Seeker" │
 └─────────────────┘          └──────────────────────┘
+
 ```
 
-### Core Components
+---
 
-- **Agent Beta** (`backend/main.py`): FastAPI server managing Digital Twin state
-- **Agent Gamma** (`backend/agents/gamma.py`): Monte Carlo simulation engine
-- **Agent Delta** (`backend/agents/delta.py`): Level 2 financial stress-tester with DSPy integration
-- **Tornado UI** (`frontend/src/components/TornadoChart.jsx`): React visualization component
+## Workflow: The Intelligence Pipeline
 
-## Features
+The engine follows a linear, rigorous workflow to move from raw data to a probabilistic investment thesis:
 
-### Phase 1: Founder Psychographics
-- **High-Agency Audit**: Detection of "Zero-to-One" momentum
-- **Cognitive Flexibility**: Distinguish "Stubborn Visionaries" from "Rigid Thinkers"
-- **Talent Magnetism**: Network analysis for A-player recruitment
-- **Technical Moat**: "Wrapper-builder" vs "Core-engine-architect" classification
+1. **Ingestion**: Users upload pitch deck text, LinkedIn bios, or GitHub Readme files via the Command Center.
+2. **Signal Extraction (Alpha)**: Initiates an "Antigravity Browser" scrape and signal extraction to create sentiment artifacts.
+3. **State Initialization (Beta)**: Constructs the Digital Twin by ingesting founder psychographics and locking the persistent state.
+4. **Stochastic Modeling (Gamma)**: Executes 10,000 Monte Carlo iterations to model scenarios like "Big Squeeze" (interest rate shocks) or "Talent Leak".
+5. **Audit and Visualization (Delta)**: Conducts Level 2 financial stress testing, generates Risk Tornado charts, and prepares the "Truth-Seeker" interrogation.
 
-### Phase 2: Market Topology
-- **Ghost Competitors**: Identification of incumbent feature-sets (Google, AWS, Salesforce)
-- **Category Maturity**: Blue Ocean / Red Ocean / Market Expansion classification
-- **Regulatory Cliff**: 2026-2027 legislation impact analysis (AI Acts, Privacy Laws)
+---
 
-### Phase 3: Digital Twin (Stochastic Modeling)
-```python
-{
-  "burn_multiple": float,
-  "runway": str,
-  "simulations": {
-    "big_squeeze": float,       # Interest rate shock
-    "talent_leak": float,       # CTO/Lead departure
-    "commoditization": float,   # Open-source competition
-    "cbdc_shock": float,        # Central bank digital currency (fintech)
-    "regulatory_cliff": float   # Legislation changes
-  }
-}
-```
+## Technical Stack
 
-### Phase 4: Level 2 Stress Testing
-- **Benchmark Calibration**: Compare against 2026 VC medians ($17.9M AI Seed, $46.5M Fintech Series A)
-- **Sensitivity Analysis**: Token costs, sales cycles, competitor actions
-- **Anti-Thesis Defense**: Construct the strongest bear case
-- **Probabilistic Confidence Intervals**: Founder resilience, technical moat durability, 10x exit probability
+### Frontend
 
-## Installation
+* **Framework**: React 19 (TypeScript)
+* **Build Tool**: Vite
+* **Styling**: Tailwind CSS
+* **Visualization**: Recharts (Radar, Bar, and Tornado charts)
+* **Icons and Motion**: Lucide React and Framer Motion
 
-### Backend Setup
-```bash
-cd /Users/bhumikamarmat/NEXUS9
-python3 -m pip install -r backend/requirements.txt
-export PYTHONPATH=$PYTHONPATH:/Users/bhumikamarmat/NEXUS9
-python3 -m backend.main
-```
+### Backend
 
-The API will be available at `http://localhost:8000`
+* **Language**: Python 3.13
+* **Framework**: FastAPI and Pydantic
+* **Intelligence**: Google Gemini (@google/genai) and DSPy for reasoning
+* **Data Processing**: NumPy for simulation and LlamaIndex for document ingestion
 
-### Frontend Setup
-```bash
-cd /Users/bhumikamarmat/NEXUS9/frontend
-npm install
-npm run dev
-```
+---
 
-## Usage
+## Mathematical Implementation: Agent Gamma
 
-### 1. Create a Digital Twin
-```bash
-curl -X POST "http://localhost:8000/twins/YourStartup" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "YourStartup",
-    "stage": "Seed",
-    "cash": 4000000,
-    "burn": 110000,
-    "arr": 540000,
-    "net_new_arr": 0,
-    "valuation_pre": 18000000
-  }'
-```
+Agent Gamma serves as the core stochastic engine, modeling startup survival through  iterations per scenario.
 
-### 2. Run Simulations
-```bash
-# Big Squeeze (Interest Rate Shock)
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=big_squeeze"
+### Core Variables and Formulae
 
-# CBDC Shock (for Fintech)
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=cbdc_shock"
+The baseline runway () is determined by the ratio of current cash reserves () to the monthly net burn ():
 
-# Commoditization
-curl -X POST "http://localhost:8000/twins/YourStartup/simulate?scenario=commoditization"
-```
+During simulations, the engine applies stochastic multipliers () representing specific Black Swan scenarios:
 
-## Output Structure
+* **Big Squeeze**: Simulates interest rate shocks and reduced capital availability.
+* **Talent Leak**: Models the impact of sudden personnel departures on productivity and burn.
+* **Commoditization**: Adjusts revenue growth to simulate pressure from open-source or incumbent competition.
 
-Each analysis generates:
+### Survival Probability
 
-1. **Investment Thesis** (3 sentences): Why this could be a billion-dollar company
-2. **The "Bear Case"**: Brutal explanation of why the company will likely fail
-3. **Risk Heatmap**: LOW/MED/HIGH for Team, Tech, Market, Timing
-4. **Simulation Dashboard**: Survival % scores for all scenarios
-5. **The "Truth-Seeker" Questions**: 3 uncomfortable questions to reveal cracks in founder logic
+The engine calculates the Survival Probability () by determining the frequency of iterations where the digital twin maintains a positive runway over a standard horizon:
+try it here : https://ai.studio/apps/drive/1tVCNxnAbA6AyIE_zMWBi2_sq6ITp7ivs?fullscreenApplet=true
 
-## Technology Stack
+---
 
-- **Backend**: Python 3.13, FastAPI, Pydantic
-- **Agents**: DSPy (reasoning), LlamaIndex (document ingestion)
-- **Simulation**: NumPy, custom Monte Carlo engine
-- **Frontend**: React, Vite, Framer Motion, Lucide Icons
-- **Visualization**: Custom SVG Tornado Charts
+## Installation and Setup
+
+### Backend
+
+1. Navigate to the backend directory: `cd backend`.
+2. Install dependencies: `python3 -m pip install -r requirements.txt`.
+3. Set the python path: `export PYTHONPATH=$PYTHONPATH:$(pwd)`.
+4. Launch the server: `python3 -m backend.main`.
+
+### Frontend
+
+1. Navigate to the frontend directory: `cd frontend`.
+2. Install packages: `npm install`.
+3. Add your `GEMINI_API_KEY` to your environment variables or `.env` file.
+4. Run the development environment: `npm run dev`.
+
+---
 
 ## Directory Structure
 
-```
-NEXUS9/
-├── backend/
-│   ├── main.py              # Agent Beta (FastAPI server)
-│   ├── agents/
-│   │   ├── gamma.py         # Monte Carlo simulator
-│   │   └── delta.py         # Level 2 auditor
-│   └── requirements.txt
-├── frontend/
-│   └── src/
-│       └── components/
-│           └── TornadoChart.jsx
-├── reports/
-│   ├── synapsegrid_level2_test.md
-│   ├── orbit_level2_test.md
-│   ├── chronos_bio_report.md
-│   └── aegismesh_level2_report.md
-├── templates/
-│   ├── founder_audit.md
-│   └── market_topology.md
-└── engine.py                # Standalone analysis utility
-```
+* **backend/**: Contains Agent Beta (FastAPI), Agent Gamma (Simulator), and Agent Delta (Auditor).
+* **frontend/src/components/**: UI components including `RiskTornado.tsx`, `AgentTerminal.tsx`, and `Sidebar.tsx`.
+* **reports/**: Stores generated Level 2 reports and founder audits.
+* **templates/**: Markdown templates for founder audits and market topology.
+* **types.ts**: Defines core data models and risk level enumerations for the engine.
+
+Would you like me to generate a script to automate the environment configuration for the Gemini API key?
